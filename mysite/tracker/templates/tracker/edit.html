@@ -1,0 +1,31 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<div class="container">
+    <form class="d-flex p-2 gap-2 flex-column justify-content-center align-items-center" method="POST">
+        {% csrf_token %}
+        <div class="col  w-50">
+            <input class="p-2 border border-gray-300 rounded-5 w-100" type="text" name="name"
+                   placeholder="Expense Name" required id="name" value="{{expense.name}}">
+        </div>
+        <div class="col w-50">
+            <input class="p-2 border border-gray-300 rounded-5 w-100" id="amount" type="number" name="amount"
+                   placeholder="Amount" value="{{expense.amount}}">
+        </div>
+        <div class="col w-50 d-flex justify-content-center align-items-center">
+            <select name="category" id="category" class="border border-gray-300 rounded-5 p-2 w-50" value="{{expense.category}}" >
+                <option value="Food" {% if expense.category == "Food" %}selected{% endif %}>Food</option>
+                <option value="Transport" {% if expense.category == "Transport" %}selected{% endif %} >Transport</option>
+                <option value="Entertainment" {% if expense.category == "Entertainment" %}selected{% endif %}>Entertainment</option>
+                <option value="Shopping" {% if expense.category == "Shopping" %}selected{% endif %}>Shopping</option>
+                <option value="Other" {% if expense.category == "Other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary ">Edit</button>
+        <a href="{% url 'index' %}" class="btn btn-danger ">Cancel</a>
+    </form>
+
+</div>
+
+
+{% endblock %}
